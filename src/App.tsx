@@ -1,25 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Col, Row, Item, Container } from "./Components"
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>  
+      <Row>
+        <Col xs={4} sm={3} md={8} lg={2} >
+          <Item>item 1</Item>
+          </Col>
+         <Col xs={4} sm={6} md={2} lg={9} >
+          <Item>item 2</Item>
+        </Col>
+        <Col xs={4} sm={3} md={2} lg={1} >
+          <Item>item 3</Item>
+        </Col>
+      </Row>
+        {/* <Grid xs={4} sm={4} md={2} lg={1} >
+          <Item>item 4</Item>
+        </Grid> */}
+      </Container>
   );
 }
 
