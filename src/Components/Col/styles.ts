@@ -1,47 +1,50 @@
-import React from 'react';
-import styled from 'styled-components'
+import styled from "styled-components";
+import { GridProps, defaultGrid } from "../../styles";
 
-export interface GridProps {
-    children: React.ReactNode
-    xs?:number;
-    sm?:number;
-    md?:number;
-    lg?:number;
-}
-
-export const breakpoints = {
-    xs: 720,
-    sm: 960,
-    md: 1240,
-    lg: 1800
-}
-
-const fr = breakpoints.lg/12;
-
+const bkp = defaultGrid.breakpoints;
+export const getFlexBasis = (size?: number) => {
+  if (!size) {
+    return "auto";
+  }
+  return `${100 * (size / 12)}%`;
+};
 
 export const Grid = styled.div<GridProps>`
-    display: flex;
-    /* background: yellow; */
-    flex-basis: ${({xs}) => `${!!xs && (xs*fr)}px`};
-    margin-inline: 0 25px;
+  display: flex;
 
-    &:last-child {
-        margin-right: 0;
+  @media (min-width: ${`${bkp.xs}px`}) and (max-width: ${`${bkp.sm - 1}px`}) {
+    flex: ${({ xs }) => `0 0 ${getFlexBasis(xs)}`};
+    max-width: ${({ xs }) => getFlexBasis(xs)};
+    padding: ${`${defaultGrid.paddings["xs"] / 2}px`};
+    & > div {
+      background: red;
     }
+  }
 
-    @media (min-width: ${`${breakpoints.xs+1}px`}) and (max-width: ${`${breakpoints.sm}px`}) {
-        /* background: purple; */
-        flex-basis: ${({sm}) => `${!!sm && (sm*fr)}%`};
+  @media (min-width: ${`${bkp.sm}px`}) and (max-width: ${`${bkp.md - 1}px`}) {
+    flex: ${({ sm }) => `0 0 ${getFlexBasis(sm)}`};
+    max-width: ${({ sm }) => getFlexBasis(sm)};
+    padding: ${`${defaultGrid.paddings["sm"] / 2}px`};
+    & > div {
+      background: purple;
     }
+  }
 
-    @media (min-width: ${`${breakpoints.sm+1}px`}) and (max-width: ${`${breakpoints.md}px`}) {
-        /* background: brown; */
-        flex-basis: ${({md}) => `${!!md && (md*fr)}%`};
+  @media (min-width: ${`${bkp.md}px`}) and (max-width: ${`${bkp.lg - 1}px`}) {
+    flex: ${({ md }) => `0 0 ${getFlexBasis(md)}`};
+    max-width: ${({ md }) => getFlexBasis(md)};
+    padding: ${`${defaultGrid.paddings["md"] / 2}px`};
+    & > div {
+      background: brown;
     }
+  }
 
-    @media (min-width: ${`${breakpoints.md+1}px`}) {
-        /* background: black; */
-        flex-basis: ${({lg}) => `${!!lg && (lg*fr)}%`};
+  @media (min-width: ${`${bkp.lg}px`}) {
+    flex: ${({ lg }) => `0 0 ${getFlexBasis(lg)}`};
+    max-width: ${({ lg }) => getFlexBasis(lg)};
+    padding: ${`${defaultGrid.paddings["lg"] / 2}px`};
+    & > div {
+      background: black;
     }
-    
-`
+  }
+`;
